@@ -10,12 +10,13 @@ const lettersArr = ref(['f', 'e', 'a', 'd', 'c', 'b'])
 
 onMounted(() => {
   console.log({ 
-  bubble: bubbleSort(arr.value, (b, a) => a - b), 
-  merge: mergeSort(arr.value, (b, a) => a - b),
+  bubble: bubbleSort(arr.value, (a, b) => a - b), 
+  merge: mergeSort(arr.value, (a, b) => a - b),
   selection: selectionSort(arr.value, (a, b) => a - b),
-  insertion: insertionSort(arr.value, (a, b) => b - a),
-  quickSort: quickSort(arr.value, (a, b) => b - a),
-  insertionLetters: insertionSort(lettersArr.value, (a, b) => a.localeCompare(b))
+  insertion: insertionSort(arr.value, (a, b) => a - b),
+  quickSort: quickSort(arr.value, (a, b) => a - b),
+  // quickSortLetters: quickSort(lettersArr.value, (a, b) => b.localeCompare(a)),
+  defaultSort: [...arr.value].sort((a, b) => a - b)
 })
 })
 </script>

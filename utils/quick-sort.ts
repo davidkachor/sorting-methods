@@ -19,7 +19,7 @@ export function quickSort<T> (arr: T[], cb: TSortCallback<T>, options?: ISortOpt
     }
 
     const result = cb(array[j], array[pivot])
-    if (result > 0) {
+    if (result < 0) {
       i++
       const temp = array[i]
       array[i] = array[j]
