@@ -8,13 +8,15 @@ export function insertionSort<T> (arr: T[], cb: TSortCallback<T>, options?: ISor
 
   for (let iteration = 0; iteration < array.length; iteration++) {
     let currentIndex = iteration
-    for (let i = iteration - 1; i >= 0; i--) {
-      const result = cb(array[i], array[currentIndex])
+
+    for (let comparativeIndex = iteration - 1; comparativeIndex >= 0; comparativeIndex--) {
+      const result = cb(array[comparativeIndex], array[currentIndex])
+
       if (result > 0) {
         const temp = array[currentIndex]
-        array[currentIndex] = array[i]
-        array[i] = temp
-        currentIndex = i
+        array[currentIndex] = array[comparativeIndex]
+        array[comparativeIndex] = temp
+        currentIndex = comparativeIndex
       }
     }
   }
