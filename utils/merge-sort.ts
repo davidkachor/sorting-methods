@@ -1,21 +1,44 @@
-export default async function mergeSort<T> (arr: T[], cb: TSortCallback<T>, options?: ISortOptions ) {
-  const initOptions: ISortOptions = {
+export default function mergeSort<T> (arr: T[], cb: TSortCallback<T>, options?: ISortOptions) {
+  const { mutate, delay }: ISortOptions = {
     mutate: options?.mutate ?? false,
     delay: options?.delay ?? 0
   }
 
-  const array = initOptions.mutate ? arr : [...arr]
+  const array = mutate ? arr : [...arr]
 
-  function divideArr(arrToSplit: T[]): T[] {
-    if (arrToSplit.length === 1) return arrToSplit
+  const centerIndex = Math.ceil((array.length - 1) / 2)
 
-    const centerIndex = Math.floor((arrToSplit.length - 1) / 2)
+  const firstPart = array.slice(0, centerIndex)
+  const secondPart = array.slice(centerIndex, array.length)
 
-    const firtsPart = arrToSplit.slice(0, centerIndex)
-    const secondPart = arrToSplit.slice(centerIndex + 1, arrToSplit.length - 1)
+  // console.log({ array, centerIndex, firstPart, secondPart })
 
-    return [...divideArr(firtsPart), ...divideArr(secondPart)]
+  if (firstPart.length > 1) mergeSort(firstPart, cb, { mutate: true, delay })
+  if (secondPart.length > 1) mergeSort(secondPart, cb, { mutate: true, delay })
+
+  let firstPartIndex = 0
+  let secondPartIndex = 0
+
+  for (let i = 0; i < array.length; i++) {
+    if (firstPartIndex === firstPart.length) {
+      array[i] = secondPart[secondPartIndex]
+      secondPartIndex++
+      continue
+    } else if (secondPartIndex === secondPart.length) {
+      array[i] = firstPart[firstPartIndex]
+      firstPartIndex++
+      continue
+    }
+
+    const result = cb(firstPart[firstPartIndex], secondPart[secondPartIndex])
+    if (result > 0) {
+      array[i] = secondPart[secondPartIndex]
+      secondPartIndex++
+    } else {
+      array[i] = firstPart[firstPartIndex]
+      firstPartIndex++
+    }
   }
 
-  console.log('sorting')
+  return array
 }
