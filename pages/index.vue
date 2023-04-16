@@ -14,6 +14,7 @@ onMounted(() => {
   merge: mergeSort(arr.value, (b, a) => a - b),
   selection: selectionSort(arr.value, (a, b) => a - b),
   insertion: insertionSort(arr.value, (a, b) => b - a),
+  quickSort: quickSort(arr.value, (a, b) => b - a),
   insertionLetters: insertionSort(lettersArr.value, (a, b) => a.localeCompare(b))
 })
 })
