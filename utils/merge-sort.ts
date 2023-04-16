@@ -1,4 +1,4 @@
-export default function mergeSort<T> (arr: T[], cb: TSortCallback<T>, options?: ISortOptions) {
+export function mergeSort<T> (arr: T[], cb: TSortCallback<T>, options?: ISortOptions) {
   const { mutate, delay }: ISortOptions = {
     mutate: options?.mutate ?? false,
     delay: options?.delay ?? 0
@@ -18,7 +18,7 @@ export default function mergeSort<T> (arr: T[], cb: TSortCallback<T>, options?: 
 
   let firstPartIndex = 0
   let secondPartIndex = 0
-
+ 
   for (let i = 0; i < array.length; i++) {
     if (firstPartIndex === firstPart.length) {
       array[i] = secondPart[secondPartIndex]

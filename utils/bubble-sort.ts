@@ -1,4 +1,4 @@
-export default function bubbleSort<T> (arr: T[], cb: TSortCallback<T>, options?: ISortOptions): T[] {
+export function bubbleSort<T> (arr: T[], cb: TSortCallback<T>, options?: ISortOptions): T[] {
   const initOptions: ISortOptions = {
     mutate: options?.mutate ?? false,
     delay: options?.delay ?? 0
